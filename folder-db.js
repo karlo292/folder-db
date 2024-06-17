@@ -17,13 +17,13 @@ function createTable(dbName, tableName) {
 }
 
 // Inserts a record in the table
-function insert(dbName, tableName, recordName, data) {
+function insertRecord(dbName, tableName, recordName, data) {
     const recordPath = path.join(dbName, tableName, `${recordName}.json`);
     fs.writeFileSync(recordPath, JSON.stringify(data, null, 2));
 }
 
 // Reads a record from the table
-function read(dbName, tableName, recordName) {
+function readRecord(dbName, tableName, recordName) {
     const recordPath = path.join(dbName, tableName, `${recordName}.json`);
     if (fs.existsSync(recordPath)) {
         const data = fs.readFileSync(recordPath, 'utf-8');
@@ -33,7 +33,7 @@ function read(dbName, tableName, recordName) {
 }
 
 // Updates a record in the table
-function update(dbName, tableName, recordName, data) {
+function updateRecord(dbName, tableName, recordName, data) {
     const recordPath = path.join(dbName, tableName, `${recordName}.json`);
     if (fs.existsSync(recordPath)) {
         fs.writeFileSync(recordPath, JSON.stringify(data, null, 2));
@@ -49,8 +49,8 @@ function deleteRecord(dbName, tableName, recordName) {
 }
 
 // Checks if a record exists in the table
-function itemExists(dbName, tableName, itemName) {
-    const itemPath = path.join(dbName, tableName, `${itemName}.json`);
+function recordExists(dbName, tableName, recordName) {
+    const itemPath = path.join(dbName, tableName, `${recordName}.json`);
     return fs.existsSync(itemPath);
 }
 
@@ -76,11 +76,11 @@ function listRecords(dbName, tableName) {
 module.exports = {
     init,
     createTable,
-    insert,
-    read,
-    update,
+    insertRecord,
+    readRecord,
+    updateRecord,
     deleteRecord,
-    itemExists,
+    recordExists,
     tableExists,
     listTables,
     listRecords
