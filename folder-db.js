@@ -32,22 +32,6 @@ function read(dbName, tableName, recordName) {
     return null;
 }
 
-// Reads all records from the table
-function readAll(dbName, tableName) {
-    const tablePath = path.join(dbName, tableName);
-    if (fs.existsSync(tablePath)) {
-        const records = fs.readdirSync(tablePath);
-        const data = [];
-        records.forEach(record => {
-            const recordPath = path.join(tablePath, record);
-            const recordData = fs.readFileSync(recordPath, 'utf-8');
-            data.push(JSON.parse(recordData));
-        });
-        return data;
-    }
-    return [];
-}
-
 // Updates a record in the table
 function update(dbName, tableName, recordName, data) {
     const recordPath = path.join(dbName, tableName, `${recordName}.json`);
@@ -76,6 +60,12 @@ function tableExists(dbName, tableName) {
     return fs.existsSync(tablePath);
 }
 
+// List all tables in the database
+function listTables(dbName) {
+    const tables = fs.readdirSync(dbName).filter(file => fs.statSync(path.join(dbName, file)).isDirectory());
+    return tables;
+}
+
 
 module.exports = {
     init,
@@ -86,5 +76,5 @@ module.exports = {
     deleteRecord,
     itemExists,
     tableExists,
-    readAll
+    listTables
 };
