@@ -15,12 +15,12 @@ const folderDB = require('@karlito1501/folder-db');
 
 Create a new database
 ```js
-folderDB.init('db');
+const db = folderDB.init('db');
 ```
 
 Create a new table
 ```js
-folderDB.createTable('db', 'users');
+const users = db.createTable('users');
 ```
 
 Insert a new record into the database table
@@ -35,43 +35,42 @@ const data = {
         "Manager"
     ]
 }
-folderDB.insertRecord('db', 'users', 'John', data)
+users.insert('John', data)
 ```
 
 Read JSON from the record
 ```js
-console.log(folderDB.readRecord('db', 'users', 'John'));
+console.log(users.read('John'));
 ```
 
-Update record
+Update record, in this case it will add new data to it
 ```js
 const newData = {
-    ...folderDB.readRecord('db', 'users', 'John'),
     "Mother": "Jane",
     "Father": "Mark",
 }
 
-folderDB.updateRecord('db', 'users', 'John', newData)
+users.update('John', newData)
 ```
 
 Delete record
 ```js
-folderDB.deleteRecord('db', 'users', 'John')
+users.delete('John')
 ```
 
 Check if record exists (returns true or false)
 ```js
-folderDB.deleteRecord('db', 'users', 'John')
+users.exists('John')
 ```
 
 Check if table exists (returns true or false)
 ```js
-folderDB.tableExists('db', 'users')
+db.tableExists('users')
 ```
 
 List all tables in a database
 ```js
-folderDB.listTables('db')
+db.listTables('db')
 ```
 
 List all records in a table
