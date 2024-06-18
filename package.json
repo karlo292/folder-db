@@ -1,6 +1,6 @@
 {
-  "name": "folder-db",
-  "version": "1.0.0",
+  "name": "@karlito1501/folder-db",
+  "version": "2.0.0",
   "main": "folder-db.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -8,4 +8,5 @@
   "author": "",
   "license": "ISC",
   "description": ""
+
 }
